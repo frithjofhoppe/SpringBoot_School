@@ -27,7 +27,7 @@ public class StudentController
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping(value = "/schoolGroup/{gId}/student")
+    @RequestMapping(value = "/schoolGroup/{gId}/student",method = RequestMethod.POST)
     private void saveStudent(@RequestBody Student student,@PathVariable String gId)
     {
         SchoolGroup sg = new SchoolGroup(gId,"");
@@ -35,10 +35,16 @@ public class StudentController
         studentService.saveStudent(student);
     }
 
-    @RequestMapping(value = "/student/{id}")
+    @RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
     private Student getStudent(@PathVariable String id)
     {
         return studentService.findStudentById(id);
+    }
+
+    @RequestMapping(value="/student",method = RequestMethod.PUT)
+    private void updateStudent(Student student)
+    {
+        studentService.updateStudent(student);
     }
 }
 
